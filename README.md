@@ -160,8 +160,8 @@ return response()->json([
 
 ```bash
 # Clone repository
-git clone https://github.com/your-username/crm-lead-system.git
-cd crm-lead-system
+git clone https://github.com/RayhanArhinza/test-project.git
+cd test-project
 
 # Install dependencies
 composer install
@@ -173,9 +173,9 @@ cp .env.example .env
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
 DB_PORT=3306
-DB_DATABASE=test_wafa
-DB_USERNAME=root
-DB_PASSWORD=03122001
+DB_DATABASE=nama_database
+DB_USERNAME=username_database
+DB_PASSWORD=password_database
 
 SESSION_DRIVER=cookie
 SESSION_LIFETIME=120
