@@ -253,6 +253,7 @@ routes/
 └── api.php                                 # API routes
 ```
 
+
 ### Frontend Structure
 ```
 resources/
