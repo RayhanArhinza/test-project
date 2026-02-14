@@ -209,11 +209,19 @@ npm run dev
 npm run build
 ```
 
+### cara menjalankan seeder
+```bash
+# Run seeder
+php artisan db:seed --class=AdminSeeder
+
+# Atau run semua seeders
+php artisan db:seed
+```
+
 ### Default Admin Credentials
 ```
-Email: admin@example.com
-Password: password123
-```
+Email: admin@mail.com
+Password: password
 
 ⚠️ **PENTING**: Ubah password default setelah login pertama kali!
 
