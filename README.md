@@ -15,7 +15,7 @@ Sistem manajemen lead berbasis web dengan fitur lengkap untuk mengelola prospek 
 
 ### Backend
 - **Framework**: Laravel 11
-- **Database**: MySQL 8.0
+- **Database**: MySQL
 - **Authentication**: Laravel Session Guard
 - **Security**: CSRF Protection, Bcrypt Password Hashing
 
@@ -148,6 +148,7 @@ return response()->json([
 - ✅ Filtered responses
 
 
+
 ## 📦 Instalasi
 
 ### Prerequisites
@@ -160,8 +161,8 @@ return response()->json([
 
 ```bash
 # Clone repository
-git clone https://github.com/RayhanArhinza/test-project.git
-cd test-project
+git clone https://github.com/your-username/crm-lead-system.git
+cd crm-lead-system
 
 # Install dependencies
 composer install
@@ -209,7 +210,9 @@ npm run dev
 npm run build
 ```
 
-### cara menjalankan seeder
+### Admin Seeder
+
+**Cara menjalankan seeder**:
 ```bash
 # Run seeder
 php artisan db:seed --class=AdminSeeder
@@ -222,7 +225,11 @@ php artisan db:seed
 ```
 Email: admin@mail.com
 Password: password
+```
 
+⚠️ **PENTING**: Ubah password default setelah login pertama kali!
+
+## 📁 Struktur Project
 
 ### Backend Structure
 ```
@@ -252,7 +259,6 @@ app/
 routes/
 └── api.php                                 # API routes
 ```
-
 
 ### Frontend Structure
 ```
@@ -488,6 +494,5 @@ curl -X GET http://localhost:8000/api/admin/activity-logs \
 ```
 
 ---
-
 
 **Made with ❤️ **
