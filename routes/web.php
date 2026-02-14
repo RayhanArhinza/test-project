@@ -7,9 +7,9 @@ use App\Http\Controllers\Admin\ActivityLogController;
 use App\Http\Controllers\DashboardController;
 
 
-
+Route::post('/leads', [LeadController::class, 'store']);
 Route::post('/admin/login', [AuthController::class, 'login']);
-
+    Route::get('/leads', [LeadController::class, 'index']);
 
 
 Route::middleware(['auth:admin'])->prefix('admin')->group(function () {
@@ -18,8 +18,8 @@ Route::middleware(['auth:admin'])->prefix('admin')->group(function () {
 
     Route::get('/dashboard/stats', [DashboardController::class, 'index']);
 
-    Route::get('/leads', [LeadController::class, 'index']);
-    Route::post('/leads', [LeadController::class, 'store']);
+
+
     Route::put('/leads/{id}', [LeadController::class, 'update']);
     Route::delete('/leads/{id}', [LeadController::class, 'destroy']);
 

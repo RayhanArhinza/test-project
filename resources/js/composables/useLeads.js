@@ -1,5 +1,18 @@
 // composables/useLeads.js
 import { ref } from 'vue'
+import axios from 'axios'
+
+// Buat instance axios terpisah untuk public endpoint (tanpa interceptor redirect)
+const publicApi = axios.create({
+  baseURL: 'http://127.0.0.1:8000',
+  withCredentials: true,
+  headers: {
+    'Content-Type': 'application/json',
+    'Accept': 'application/json',
+  }
+})
+
+// Import api yang ada interceptor untuk protected endpoints
 import api from '../services/api'
 
 export function useLeads() {
@@ -29,7 +42,8 @@ export function useLeads() {
     error.value = null
 
     try {
-      await api.post('/admin/leads', leadData)
+      // Gunakan publicApi untuk create lead (tidak perlu auth)
+      await publicApi.post('/api/admin/leads', leadData)
       return { success: true }
     } catch (err) {
       console.error('Error creating lead:', err)
