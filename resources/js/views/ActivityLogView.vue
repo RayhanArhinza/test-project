@@ -1,3 +1,4 @@
+<!-- views/ActivityLogView.vue -->
 <template>
   <AdminLayout>
     <div class="max-w-5xl mx-auto">
@@ -55,41 +56,15 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
-import api from '../services/api'
+import { onMounted } from 'vue'
 import AdminLayout from '../layouts/AdminLayout.vue'
+import { useActivityLogs } from '../composables/useActivityLogs'
+import { useDateFormatter } from '../composables/useDateFormatter'
 
-const logs = ref({ data: [] })
+const { logs, fetchLogs } = useActivityLogs()
+const { formatDate } = useDateFormatter()
 
-const fetchLogs = async () => {
-  try {
-    const res = await api.get('/admin/activity-logs')
-    logs.value = res.data
-  } catch (error) {
-    console.error('Error fetching activity logs:', error)
-  }
-}
-
-const formatDate = (dateString) => {
-  if (!dateString) return '-'
-
-  try {
-    const date = new Date(dateString)
-    const now = new Date()
-    const diff = now - date
-    const seconds = Math.floor(diff / 1000)
-    const minutes = Math.floor(seconds / 60)
-    const hours = Math.floor(minutes / 60)
-    const days = Math.floor(hours / 24)
-
-    if (days > 0) return `${days} hari yang lalu`
-    if (hours > 0) return `${hours} jam yang lalu`
-    if (minutes > 0) return `${minutes} menit yang lalu`
-    return 'Baru saja'
-  } catch (e) {
-    return '-'
-  }
-}
-
-onMounted(fetchLogs)
+onMounted(() => {
+  fetchLogs()
+})
 </script>

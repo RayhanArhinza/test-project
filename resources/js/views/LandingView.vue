@@ -1,4 +1,4 @@
-<!-- pages/LandingPage.vue -->
+<!-- views/LandingView.vue -->
 <template>
   <PublicLayout>
     <div class="bg-gradient-to-b from-indigo-50 via-white to-purple-50/30 min-h-screen">
@@ -113,7 +113,7 @@
               <p class="mt-3 text-gray-600">Isi data di bawah ini, kami akan segera menghubungi Anda.</p>
             </div>
 
-            <form @submit.prevent="submitForm" class="space-y-6">
+            <form @submit.prevent="handleSubmit" class="space-y-6">
 
               <div>
                 <label class="block mb-2 font-medium text-gray-700">Nama Lengkap</label>
@@ -149,19 +149,8 @@
               </button>
             </form>
 
-            <transition name="fade-scale">
-              <div v-if="successMessage" class="mt-6 p-5 bg-green-50 border border-green-200 text-green-800 rounded-2xl text-center flex items-center justify-center gap-3 shadow-sm">
-                <svg class="w-6 h-6 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                {{ successMessage }}
-              </div>
-            </transition>
-
-            <transition name="fade-scale">
-              <div v-if="errorMessage" class="mt-6 p-5 bg-red-50 border border-red-200 text-red-800 rounded-2xl text-center flex items-center justify-center gap-3 shadow-sm">
-                <svg class="w-6 h-6 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                {{ errorMessage }}
-              </div>
-            </transition>
+            <SuccessMessage :message="successMessage" />
+            <ErrorAlert v-if="errorMessage" :message="errorMessage" />
 
             <p class="mt-8 text-center text-sm text-gray-500">
               Data Anda 100% aman dan tidak akan dibagikan kepada pihak ketiga 🔒
@@ -212,8 +201,12 @@
 
 <script setup>
 import { reactive, ref } from 'vue'
-import api from '../services/api' // sesuaikan path
 import PublicLayout from '../layouts/PublicLayout.vue'
+import SuccessMessage from '../components/SuccessMessage.vue'
+import ErrorAlert from '../components/ErrorAlert.vue'
+import { useLeads } from '../composables/useLeads'
+
+const { loading, createLead } = useLeads()
 
 const form = reactive({
   name: '',
@@ -222,7 +215,6 @@ const form = reactive({
   institution_name: ''
 })
 
-const loading = ref(false)
 const successMessage = ref(null)
 const errorMessage = ref(null)
 
@@ -230,19 +222,17 @@ const resetForm = () => {
   Object.assign(form, { name: '', whatsapp_number: '', email: '', institution_name: '' })
 }
 
-const submitForm = async () => {
-  loading.value = true
+const handleSubmit = async () => {
   successMessage.value = null
   errorMessage.value = null
 
-  try {
-    await api.post('/admin/leads', form)
+  const result = await createLead(form)
+
+  if (result.success) {
     successMessage.value = 'Data berhasil dikirim! Kami akan segera menghubungi Anda.'
     resetForm()
-  } catch (err) {
-    errorMessage.value = err.response?.data?.message || 'Terjadi kesalahan. Coba beberapa saat lagi.'
-  } finally {
-    loading.value = false
+  } else {
+    errorMessage.value = result.error
   }
 }
 </script>
@@ -264,12 +254,4 @@ const submitForm = async () => {
 
 .animation-delay-3000 { animation-delay: 3s; }
 .animation-delay-6000 { animation-delay: 6s; }
-
-.fade-scale-enter-active, .fade-scale-leave-active {
-  transition: all 0.4s ease;
-}
-.fade-scale-enter-from, .fade-scale-leave-to {
-  opacity: 0;
-  transform: scale(0.95);
-}
 </style>

@@ -10,7 +10,6 @@
         </h1>
 
         <div class="space-x-4">
-
           <router-link
             to="/login"
             class="bg-indigo-600 text-white px-5 py-2.5 rounded-full hover:bg-indigo-700 transition font-medium shadow-sm"
@@ -28,7 +27,6 @@
 
   </div>
 </template>
-
 
 <script setup>
 </script>

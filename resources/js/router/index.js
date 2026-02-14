@@ -1,39 +1,39 @@
-// resources/js/router/index.js
+// router/index.js
 import { createRouter, createWebHistory } from 'vue-router'
-import LandingPage from '../pages/LandingPage.vue'
-import LoginPage from '../pages/LoginPage.vue'
-import DashboardPage from '../pages/DashboardPage.vue'
-import LeadPage from '../pages/LeadPage.vue'
-import ActivityLogPage from '../pages/ActivityLogPage.vue'
+import LandingView from '../views/LandingView.vue'
+import LoginView from '../views/LoginView.vue'
+import DashboardView from '../views/DashboardView.vue'
+import LeadsView from '../views/LeadsView.vue'
+import ActivityLogView from '../views/ActivityLogView.vue'
 
 const routes = [
   {
     path: '/',
     name: 'Landing',
-    component: LandingPage
+    component: LandingView
   },
   {
     path: '/login',
     name: 'Login',
-    component: LoginPage,
+    component: LoginView,
     meta: { guest: true }
   },
   {
     path: '/dashboard',
     name: 'Dashboard',
-    component: DashboardPage,
+    component: DashboardView,
     meta: { requiresAuth: true }
   },
   {
     path: '/leads',
     name: 'Leads',
-    component: LeadPage,
+    component: LeadsView,
     meta: { requiresAuth: true }
   },
   {
     path: '/activity-logs',
     name: 'ActivityLogs',
-    component: ActivityLogPage,
+    component: ActivityLogView,
     meta: { requiresAuth: true }
   }
 ]
@@ -42,7 +42,6 @@ const router = createRouter({
   history: createWebHistory(),
   routes
 })
-
 
 router.beforeEach((to, from, next) => {
   const token = localStorage.getItem('admin_token')
