@@ -483,4 +483,4 @@ curl -X GET http://localhost:8000/api/admin/activity-logs \
 
 ---
 
-**Made with ❤️ using Laravel 11 & Vue.js 3**
+**Made with ❤️ **
