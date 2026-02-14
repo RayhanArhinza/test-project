@@ -223,9 +223,6 @@ php artisan db:seed
 Email: admin@mail.com
 Password: password
 
-⚠️ **PENTING**: Ubah password default setelah login pertama kali!
-
-## 📁 Struktur Project
 
 ### Backend Structure
 ```
