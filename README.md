@@ -147,21 +147,6 @@ return response()->json([
 - ✅ Minimal data exposure
 - ✅ Filtered responses
 
-### 🎖️ Security Score: 95/100
-
-| Kategori | Score |
-|----------|-------|
-| Authentication & Authorization | 10/10 |
-| CSRF Protection | 10/10 |
-| Session Security | 10/10 |
-| Activity Logging | 10/10 |
-| Input Validation | 10/10 |
-| SQL Injection Prevention | 10/10 |
-| XSS Prevention | 10/10 |
-| Rate Limiting | 9/10 |
-| Error Handling | 10/10 |
-| Data Protection | 9/10 |
-| HTTPS (Production) | 7/10 |
 
 ## 📦 Instalasi
 
